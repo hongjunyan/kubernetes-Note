@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-tododeployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+        - name: k8s-todoapp-container
+          image: hongjunyan/todo-pod:v1
+          ports:
+            - containerPort: 3000  # the port of todoapp in container, not port of external port
+  selector:
+    matchLabels:
+      app: todoapp # the label in template up above
